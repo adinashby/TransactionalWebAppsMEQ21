@@ -51,37 +51,49 @@ n == nums.length
 
 ```javascript
 function kthSmallestSubarraySum(nums, k) {
-  let l = Infinity;
-  let r = 0;
+  let min = Infinity;
+  let sum = 0;
 
-  for (let x in nums) {
-    l = Math.min(l, x);
-    r += x;
+  for (let each in nums) {
+    min = Math.min(min, each);
+    sum += each;
   }
 
-  while (l < r) {
-    let mid = (l + r) >> 1;
-    if (f(nums, mid) >= k) {
-      r = mid;
+  let low = min;
+  let high = sum;
+
+  while (low < high) {
+    let mid = parseInt((high - low) / 2) + low;
+
+    let count = countSubarrays(nums, mid);
+    if (count < k) {
+      low = mid + 1;
     } else {
-      l = mid + 1;
+      high = mid;
     }
   }
-  return l;
+
+  return low;
 }
 
-function f(nums, s) {
-  let t = 0,
-    j = 0;
-  let cnt = 0;
-  for (let i = 0; i < nums.length; ++i) {
-    t += nums[i];
-    while (t > s) {
-      t -= nums[j++];
+function countSubarrays(nums, threshold) {
+  let count = 0;
+  let sum = 0;
+  let length = nums.length;
+  let left = 0;
+  let right = 0;
+
+  while (right < length) {
+    sum += nums[right];
+    while (sum > threshold) {
+      sum -= nums[left];
+      left++;
     }
-    cnt += i - j + 1;
+    count += right - left + 1;
+    right++;
   }
-  return cnt;
+
+  return count;
 }
 
 console.log(kthSmallestSubarraySum([2, 1, 3], 4));
