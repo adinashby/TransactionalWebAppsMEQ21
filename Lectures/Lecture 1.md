@@ -49,7 +49,7 @@ n == nums.length
 
 ## Solution
 
-```
+```javascript
 function kthSmallestSubarraySum(nums, k) {
   let l = 1 << 30,
     r = 0;
