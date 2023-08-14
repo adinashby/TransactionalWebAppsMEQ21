@@ -51,8 +51,9 @@ n == nums.length
 
 ```javascript
 function kthSmallestSubarraySum(nums, k) {
-  let l = 1 << 30,
-    r = 0;
+  let l = Infinity;
+  let r = 0;
+
   for (let x in nums) {
     l = Math.min(l, x);
     r += x;
