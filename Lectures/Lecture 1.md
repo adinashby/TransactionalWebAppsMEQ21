@@ -6,6 +6,10 @@ Given an integer array nums of length n and an integer k, return the kth **small
 
 A subarray is defined as a non-empty contiguous sequence of elements in an array. A subarray sum is the sum of all elements in the subarray.
 
+Note: You should use binary search to solve this problem.
+
+Note 2: For any sorting, use a sorting algorithm that you haven't use in the previous labs.
+
 Example 1:
 
 Input: nums = [2,1,3], k = 4  
