@@ -51,7 +51,7 @@ n == nums.length
 1 <= nums[i] <= 5 _ 104  
 1 <= k <= n \* (n + 1) / 2
 
-## Solution
+## Solution 1
 
 ```javascript
 function kthSmallestSubarraySum(nums, k) {
@@ -102,4 +102,38 @@ function countSubarrays(nums, threshold) {
 
 console.log(kthSmallestSubarraySum([2, 1, 3], 4));
 console.log(kthSmallestSubarraySum([3, 3, 5, 5], 7));
+```
+
+## Solution 2
+
+```javascript
+function kthSmallestSubarraySum(nums, k) {
+  let sumList = [];
+  // let numberOfSubarrays = countSubarray(nums);
+  // let left = 0;
+  // let right = 0;
+  let tempSum = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i; j < nums.length; j++) {
+      tempSum += nums[j];
+      sumList.push(tempSum);
+    }
+    tempSum = 0;
+  }
+
+  sumList = sumList.sort((a, b) => a - b);
+
+  console.log(sumList);
+
+  return sumList[k - 1];
+}
+
+function countSubarrays(nums) {
+  return (nums.length * (nums.length + 1)) / 2;
+}
+
+console.log(kthSmallestSubarraySum([2, 1, 3], 4));
+console.log(kthSmallestSubarraySum([3, 3, 5, 5], 7));
+console.log(kthSmallestSubarraySum([1, 2, 3, 4, 5], 6));
 ```
